@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoomFlow - Canlı Oda ve Ekran Paylaşımı</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dark-theme">
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <h1>🎬 RoomFlow</h1>
+      </div>
+      <div class="navbar-menu" id="navbarMenu">
+        <% if (isLoggedIn) { %>
+          <span class="navbar-item">👤 <%= user.username %></span>
+          <button class="btn btn-secondary" onclick="logout()">Çıkış</button>
+        <% } else { %>
+          <button class="btn btn-secondary" onclick="showLoginModal()">Giriş</button>
+          <button class="btn btn-primary" onclick="showRegisterModal()">Kayıt</button>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Profesyonel Canlı Oda Çözümü</h1>
+        <p>WebRTC teknolojisi ile sesli konuşma ve ekran paylaşımı yapın. Hızlı, güvenli ve kullanıması kolay.</p>
+        
+        <div class="hero-buttons">
+          <% if (isLoggedIn) { %>
+            <button class="btn btn-primary btn-lg" onclick="createRoom()">🚀 Oda Oluştur</button>
+            <button class="btn btn-secondary btn-lg" onclick="showJoinModal()">🔗 Odaya Katıl</button>
+          <% } else { %>
+            <button class="btn btn-primary btn-lg" onclick="showRegisterModal()">🚀 Başla</button>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <h2>✨ Özellikler</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎙️</div>
+          <h3>Kristal Net Ses</h3>
+          <p>WebRTC teknolojisi ile doğrudan P2P bağlantı, düşük latency</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📺</div>
+          <h3>Ekran Paylaşımı</h3>
+          <p>Tüm ekranı veya sadece pencereyi paylaşabilirsiniz</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>Grup Konuşması</h3>
+          <p>Bir odada 5+ kişi aynı anda konuşabilir (Premium: 25+)</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Güvenli</h3>
+          <p>End-to-end encrypted, hiçbir kayıt tutulmaz</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Tüm Cihazlarda</h3>
+          <p>Tarayıcıda çalışır. Uygulama indirmesine gerek yok</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Hızlı</h3>
+          <p>Anında oda oluşturun, linki paylaşın, konuşun</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing">
+    <div class="container">
+      <h2>💳 Fiyatlandırma</h2>
+      
+      <div class="pricing-grid">
+        <!-- Free Plan -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Ücretsiz</h3>
+            <div class="pricing-price">₺0<span>/ay</span></div>
+          </div>
+          
+          <ul class="pricing-features">
+            <li>✅ Oda Oluşturma</li>
+            <li>✅ 5 Kişi</li>
+            <li>✅ 30 Dakika</li>
+            <li>✅ Sesli Konuşma</li>
+            <li>✅ Ekran Paylaşımı (720p)</li>
+            <li>❌ Sınırsız Süre</li>
+            <li>❌ Daha Fazla Kişi</li>
+          </ul>
+          
+          <button class="btn btn-secondary btn-block" onclick="<% if (isLoggedIn) { %>createRoom()<% } else { %>showRegisterModal()<% } %>">
+            Şimdi Kullan
+          </button>
+        </div>
+        
+        <!-- Premium Plan -->
+        <div class="pricing-card premium-card">
+          <div class="pricing-badge">Popüler</div>
+          
+          <div class="pricing-header">
+            <h3>Premium</h3>
+            <div class="pricing-price">₺15<span>/ay</span></div>
+          </div>
+          
+          <ul class="pricing-features">
+            <li>✅ Oda Oluşturma</li>
+            <li>✅ 25 Kişi</li>
+            <li>✅ Sınırsız Süre</li>
+            <li>✅ Sesli Konuşma</li>
+            <li>✅ Ekran Paylaşımı (1080p)</li>
+            <li>✅ Yüksek Ses Kalitesi</li>
+            <li>✅ Öncelik Desteği</li>
+          </ul>
+          
+          <button class="btn btn-primary btn-block" onclick="<% if (isLoggedIn) { %>goToPremium()<% } else { %>showRegisterModal()<% } %>">
+            Şimdi Yükselt
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
+      
+      <h2>🔐 Giriş</h2>
+      
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" required placeholder="example@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label>Şifre</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+        
+        <p style="text-align: center; margin-top: 15px;">
+          Hesabınız yok mu? <a href="#" onclick="switchModal('loginModal', 'registerModal')">Kayıt Olun</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- REGISTER MODAL -->
+  <div class="modal" id="registerModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('registerModal')">&times;</button>
+      
+      <h2>📝 Kayıt</h2>
+      
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label>Kullanıcı Adı</label>
+          <input type="text" id="registerUsername" required placeholder="kullanıcı_adı">
+        </div>
+        
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="registerEmail" required placeholder="example@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label>Şifre</label>
+          <input type="password" id="registerPassword" required placeholder="••••••••">
+        </div>
+        
+        <div class="form-group">
+          <label>Şifre Tekrarla</label>
+          <input type="password" id="registerConfirm" required placeholder="••••••••">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
+        
+        <p style="text-align: center; margin-top: 15px;">
+          Zaten hesabınız var mı? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Giriş Yapın</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- JOIN MODAL -->
+  <div class="modal" id="joinModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('joinModal')">&times;</button>
+      
+      <h2>🔗 Odaya Katıl</h2>
+      
+      <form id="joinForm" onsubmit="handleJoin(event)">
+        <div class="form-group">
+          <label>Oda Linki</label>
+          <input type="text" id="roomLink" required placeholder="https://roomflow.app/room/room_abc123...">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Katıl</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 RoomFlow - WebRTC Canlı Oda Platformu</p>
+      <p>Made with ❤️ by RoomFlow Team</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

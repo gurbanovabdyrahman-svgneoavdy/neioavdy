@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Üyelik - RoomFlow</title>
+  <link rel="stylesheet" href="/css/premium.css">
+</head>
+<body class="dark-theme">
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <h1>🎬 RoomFlow</h1>
+      </div>
+      <div class="navbar-menu">
+        <button class="btn btn-secondary" onclick="window.history.back()">← Geri</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="premium-section">
+    <div class="container">
+      <h1>✨ Premium'a Yükselt</h1>
+      <p class="subtitle">Tüm sınırlamalardan kurtulun, sınırsız konuşun</p>
+
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Özellik</th>
+              <th>Ücretsiz</th>
+              <th>Premium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Oda Oluşturma</td>
+              <td>✅</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Katılımcı Sayısı</td>
+              <td>5 Kişi</td>
+              <td><strong>25 Kişi</strong></td>
+            </tr>
+            <tr>
+              <td>Oda Süresi</td>
+              <td>30 Dakika</td>
+              <td><strong>Sınırsız</strong></td>
+            </tr>
+            <tr>
+              <td>Ses Kalitesi</td>
+              <td>16 kHz</td>
+              <td><strong>48 kHz</strong></td>
+            </tr>
+            <tr>
+              <td>Ekran Paylaşımı</td>
+              <td>720p</td>
+              <td><strong>1080p</strong></td>
+            </tr>
+            <tr>
+              <td>Öncelik Desteği</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Özel Odalar</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pricing-section">
+        <h2>💳 Ödeme Seçenekleri</h2>
+        
+        <div class="payment-providers">
+          <!-- iyzico -->
+          <div class="provider-card">
+            <div class="provider-logo">🏦</div>
+            <h3>iyzico (Tavsiye Edilen)</h3>
+            <p>Türk ödeme sistemi, en güvenli seçenek</p>
+            <div class="price">₺15 / ay</div>
+            <button class="btn btn-primary" onclick="startPayment('monthly', 'iyzico')">
+              iyzico ile Öde
+            </button>
+          </div>
+          
+          <!-- PayTR -->
+          <div class="provider-card">
+            <div class="provider-logo">💳</div>
+            <h3>PayTR</h3>
+            <p>PayTR ödeme sistemi</p>
+            <div class="price">₺15 / ay</div>
+            <button class="btn btn-primary" onclick="startPayment('monthly', 'paytr')">
+              PayTR ile Öde
+            </button>
+          </div>
+          
+          <!-- Stripe -->
+          <div class="provider-card">
+            <div class="provider-logo">💰</div>
+            <h3>Stripe</h3>
+            <p>Uluslararası kredi kartları</p>
+            <div class="price">$5 / ay</div>
+            <button class="btn btn-primary" onclick="startPayment('monthly', 'stripe')">
+              Stripe ile Öde
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-section">
+        <h2>❓ Sıkça Sorulan Sorular</h2>
+        
+        <div class="faq-item">
+          <h4>İstedğim zaman iptal edebilir miyim?</h4>
+          <p>Evet, Premium üyeliğini istediğiniz zaman iptal edebilirsiniz. Hiçbir gizli ücret yoktur.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h4>Ödeme güvenli mi?</h4>
+          <p>Evet, tüm ödemeler SSL şifrelemesi ile korunur. Kredi kartı bilgileriniz bize gönderilmez.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h4>Hangi ödeme yöntemlerini kabul ediyorsunuz?</h4>
+          <p>Kredi/Banka kartı (Visa, MasterCard), Çok Para Cüzdanı, Banka Transferi ve daha fazlası.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h4>Fatura alabilir miyim?</h4>
+          <p>Evet, her ödeme için otomatik olarak fatura gönderilir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 RoomFlow - WebRTC Canlı Oda Platformu</p>
+    </div>
+  </footer>
+
+  <script src="/js/premium.js"></script>
+</body>
+</html>

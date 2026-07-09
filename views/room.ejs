@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= roomName %> - RoomFlow</title>
+  <link rel="stylesheet" href="/css/room.css">
+</head>
+<body class="dark-theme">
+  <!-- NAVBAR -->
+  <nav class="room-navbar">
+    <div class="navbar-left">
+      <h2>🎬 <%= roomName %></h2>
+      <span class="room-info">👥 <span id="participantCount">1</span>/<%= maxParticipants %> kişi</span>
+    </div>
+    
+    <div class="navbar-right">
+      <button class="btn btn-icon" id="btnCopyLink" title="Davet Linkini Kopyala">
+        📋 Kopyala
+      </button>
+      <button class="btn btn-icon btn-danger" onclick="leaveRoom()" title="Odadan Çık">
+        🚪 Çık
+      </button>
+    </div>
+  </nav>
+
+  <div class="room-container">
+    <!-- VIDEO AREA -->
+    <div class="video-area">
+      <div class="video-grid" id="videoGrid">
+        <!-- Kendi video -->
+        <div class="video-container local">
+          <video id="localVideo" autoplay muted playsinline></video>
+          <div class="video-label">Siz</div>
+          <div class="video-stats" id="localStats"></div>
+        </div>
+        
+        <!-- Remote videoları buraya eklenecek (JavaScript tarafından) -->
+      </div>
+    </div>
+
+    <!-- CONTROL PANEL -->
+    <div class="control-panel">
+      <div class="controls">
+        <!-- Mikrofon -->
+        <button class="btn btn-control" id="btnMic" title="Mikrofon Aç/Kapat">
+          <span class="icon">🎙️</span>
+          <span class="label">Mikrofon</span>
+        </button>
+        
+        <!-- Kamera -->
+        <button class="btn btn-control" id="btnCamera" title="Kamera Aç/Kapat">
+          <span class="icon">📷</span>
+          <span class="label">Kamera</span>
+        </button>
+        
+        <!-- Ekran Paylaşımı -->
+        <button class="btn btn-control" id="btnScreen" title="Ekran Paylaş">
+          <span class="icon">🖥️</span>
+          <span class="label">Ekran</span>
+        </button>
+        
+        <!-- Chat (İleride) -->
+        <button class="btn btn-control disabled" title="Sohbet (Yakında)">
+          <span class="icon">💬</span>
+          <span class="label">Sohbet</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PARTICIPANTS PANEL -->
+    <div class="participants-panel">
+      <h3>Katılımcılar</h3>
+      <div class="participants-list" id="participantsList">
+        <!-- Katılımcılar buraya eklenecek (JavaScript tarafından) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS MODAL -->
+  <div class="modal" id="statsModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('statsModal')">&times;</button>
+      
+      <h2>📊 İstatistikler</h2>
+      
+      <div class="stats-grid">
+        <div class="stat-item">
+          <label>Bağlantı Türü</label>
+          <span id="connectionType">-</span>
+        </div>
+        
+        <div class="stat-item">
+          <label>Gecikme (ms)</label>
+          <span id="latency">-</span>
+        </div>
+        
+        <div class="stat-item">
+          <label>Giden Bant (Kbps)</label>
+          <span id="bytesSent">-</span>
+        </div>
+        
+        <div class="stat-item">
+          <label>Gelen Bant (Kbps)</label>
+          <span id="bytesReceived">-</span>
+        </div>
+        
+        <div class="stat-item">
+          <label>Video Çözünürlüğü</label>
+          <span id="videoResolution">-</span>
+        </div>
+        
+        <div class="stat-item">
+          <label>Ses Örnek Hızı</label>
+          <span id="audioSampleRate">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCKET.IO -->
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <!-- WEBRTC ADAPTER (Tarayıcı uyumluluğu) -->
+  <script src="https://webrtcjs.blob.core.windows.net/adapter-latest.js"></script>
+  
+  <!-- ROOM JS -->
+  <script>
+    const ROOM_ID = '<%= roomId %>';
+    const IS_LOGGED_IN = <%= isLoggedIn %>;
+    const USER_PLAN = '<%= userPlan || "free" %>';
+    const MAX_PARTICIPANTS = <%= maxParticipants %>;
+    const SCREEN_QUALITY = '<%= planLimits.screenQuality %>';
+  </script>
+  
+  <script src="/js/room.js"></script>
+</body>
+</html>
